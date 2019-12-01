@@ -46,4 +46,30 @@ class UsersController extends Controller
         // 路由跳转 绑定数据
         return redirect()->route('users.show',[$user]);
     }
+
+    // 用户编辑页面
+    public function edit(User $user)
+    {
+        return view('users.edit',compact('user'));
+    }
+
+    // 用户进行编辑
+    public function update(User $user,Request $request)
+    {
+        // 数据验证
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'password' => 'nullable|confirmed|min:6' // 密码为空也可以
+        ]);
+        // 数据进行更新
+        $data           = [];
+        $data['name']   = $request->name;
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        $user->update($data);
+        session()->flash('success', '个人资料更新成功！');
+        // 重定向
+        return redirect()->route('users.show',$user);
+    }
 }
