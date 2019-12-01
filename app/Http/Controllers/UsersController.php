@@ -13,9 +13,18 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store','index']
         ]);
     }
+
+    // 全部用户列表
+    public function index()
+    {
+        // $users = User::all();
+        $users = User::paginate(10);
+        return view('users.index',compact('users'));
+    }
+
 
     // 用户注册
     public function create()
@@ -83,4 +92,13 @@ class UsersController extends Controller
         // 重定向
         return redirect()->route('users.show',$user);
     }
+
+    // 用户删除
+    public function destroy(User $user)
+    {
+        $user->delete();
+        session()->flash('success','成功删除用户！ ');
+        return back();
+    }
+
 }
