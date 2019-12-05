@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         // 指定我们要运行假数据填充的文件
         $this->call(UsersTableSeeder::class);
-
+        // 微博数据填充文件
+        $this->call(StatusesTableSeeder::class);
         Model::reguard();
     }
 }
