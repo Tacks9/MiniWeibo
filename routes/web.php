@@ -73,3 +73,5 @@ Route::resource('users', 'UsersController');
 // Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
 
 
+// 微博 发布 删除
+Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
