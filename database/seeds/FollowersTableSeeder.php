@@ -5,14 +5,8 @@ use App\Models\User;
 
 class FollowersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        // 获取第一个用户
         $users = User::all();
         $user = $users->first();
         $user_id = $user->id;
@@ -21,8 +15,7 @@ class FollowersTableSeeder extends Seeder
         $followers = $users->slice(1);
         $follower_ids = $followers->pluck('id')->toArray();
 
-
-         // 关注除了 1 号用户以外的所有用户
+        // 关注除了 1 号用户以外的所有用户
         $user->follow($follower_ids);
 
         // 除了 1 号用户以外的所有用户都来关注 1 号用户
