@@ -66,8 +66,13 @@ class User extends Authenticatable
     // 微博内容流
     public function feed()
     {
-        return $this->statuses()
-                    ->orderBy('created_at', 'desc');
+        // 取出所有关注用户的信息
+        $user_ids = $this->followings->pluck('id')->toArray();
+        array_push($user_ids, $this->id);
+        // 取出所有用户的微博动态并进行倒序排序
+        return Status::whereIn('user_id', $user_ids)
+                              ->with('user')
+                              ->orderBy('created_at', 'desc');
     }
 
 
