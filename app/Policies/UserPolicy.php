@@ -32,4 +32,13 @@ class UserPolicy
         // 删除的用户对象不是自己
         return $currentUser->is_admin && $currentUser->id !== $user->id;
     }
+
+    // 关注策略
+    public function follow(User $currentUser, User $user)
+    {
+        // 自己不能关注自己
+        return $currentUser->id !== $user->id;
+    }
+
+
 }
