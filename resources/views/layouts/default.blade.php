@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>@yield('title', 'Weibo App') - Laravel 入门教程</title>
+    <title>@yield('title', 'Weibo App') - 迷你微博</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="shortcut icon" href="http://www.nyist.edu.cn/img/nglogo.ico">
   </head>
 
   <body>
